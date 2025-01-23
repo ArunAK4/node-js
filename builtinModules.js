@@ -22,3 +22,22 @@ console.log(path.parse(__filename));
 console.log(path.join('folder_name', 'index.html'));
 
 console.log(path.join(__dirname, 'data.json'));
+
+// Events Module
+// This allows us to run non blocking code, the events will be triggered based
+// on the emitter.
+const EventEmitter = require('node:events');
+
+const emitter = new EventEmitter();
+
+emitter.on("order-burger", (size) => {
+    console.log(`Your Order is Successful, We are preparing ${size} burger`);
+})
+
+emitter.on("order-burger", (size) => {
+    if(size === "large") {
+        console.log("You have received an offer!!");
+    }
+})
+
+emitter.emit("order-burger", "large");

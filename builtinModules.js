@@ -41,3 +41,11 @@ emitter.on("order-burger", (size) => {
 })
 
 emitter.emit("order-burger", "large");
+
+// Buffers
+const buffer = new Buffer.from("Sharan");
+
+console.log(buffer)
+console.log(buffer.toString()); // Sharan
+console.log(buffer.toJSON());
+

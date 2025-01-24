@@ -1,0 +1,17 @@
+{
+  "name": "node_js_training",
+  "version": "1.0.0",
+  "description": "Node JS Training",
+  "main": "index.js",
+  "scripts": {
+    "server": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.10.10",
+    "node": "^18.20.6"
+  }
+}

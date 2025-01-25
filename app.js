@@ -16,6 +16,8 @@ const server = http.createServer((request, response) => {
     parseBody(request);
     response.writeHead(302, "Found", { Location: "/todo" });
     response.end();
+  } else if (url == "/api/todos" && method == "GET") {
+    sendJSONResponse(response, "./data.json");
   } else {
     // 404 Path
     response.writeHead(404, "Not Found");
@@ -53,6 +55,28 @@ function readFileAndResponse(response, filePath) {
   });
 }
 
+function sendJSONResponse(response, filePath) {
+  const resolvedPath = path.resolve(filePath);
+
+  fs.readFile(resolvedPath, "utf-8", (err, data) => {
+    if (err) {
+      console.error(`Error reading file ${resolvedPath}:`, err);
+      response.writeHead(404, { "Content-Type": "application/json" });
+      response.end(JSON.stringify({ error: "File Not Found" }));
+    } else {
+      try {
+        const jsonData = JSON.parse(data); // Parse the file content to JSON
+        response.writeHead(200, { "Content-Type": "application/json" });
+        response.end(JSON.stringify(jsonData)); // Send the JSON data
+      } catch (parseError) {
+        console.error("Error parsing JSON:", parseError);
+        response.writeHead(500, { "Content-Type": "application/json" });
+        response.end(JSON.stringify({ error: "Invalid JSON format" }));
+      }
+    }
+  });
+}
+
 // Parse Request Body and Save it in JSON file
 function parseBody(req) {
   let body = [];
@@ -69,20 +93,16 @@ function parseBody(req) {
       responseData[body.split("=")[0]] = body.split("=")[1];
     });
 
-    fs.readFile(
-      "data.json",
-      "utf8",
-      (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          let obj = JSON.parse(data); //now it an object
-          obj.data.push(responseData); //add some data
-          let json = JSON.stringify(obj); //convert it back to json
-          fs.writeFileSync("data.json", json); // write it back
-        }
+    fs.readFile("data.json", "utf8", (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        let obj = JSON.parse(data); //now it an object
+        obj.data.push(responseData); //add some data
+        let json = JSON.stringify(obj); //convert it back to json
+        fs.writeFileSync("data.json", json); // write it back
       }
-    );
+    });
   });
 
   return responseData;

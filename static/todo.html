@@ -1,19 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo App Node JS</title>
-</head>
-<body>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
     <form action="/submit" method="post">
-        <label for="task">Task Name</label>
-        <input type="text" name="task" id="task">
-        <label for="desc">Task Description</label>
-        <input type="text" name="desc" id="desc">
-        <input type="submit" value="Submit">
+      <label for="task">Task Name</label>
+      <input type="text" name="task" id="task" />
+      <label for="desc">Task Description</label>
+      <input type="text" name="desc" id="desc" />
+      <input type="submit" value="Submit" />
     </form>
-    <br>
+    <br />
+    <div id="content"></div>
     <a href="http://localhost:3001">Back to Homepage</a>
-</body>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Fetch JSON data from /api/todos
+        fetch("/api/todos")
+          .then((response) => response.json()) // Parse JSON response
+          .then((json) => {
+            const container = document.getElementById("content");
+            if (json.data && json.data.length > 0) {
+              // Create table
+              const table = document.createElement("table");
+
+              // Create header row
+              const headerRow = document.createElement("tr");
+              ["Task", "Description"].forEach((header) => {
+                const th = document.createElement("th");
+                th.textContent = header;
+                headerRow.appendChild(th);
+              });
+              table.appendChild(headerRow);
+
+              // Populate rows with data
+              json.data.forEach((item) => {
+                const row = document.createElement("tr");
+
+                const taskCell = document.createElement("td");
+                taskCell.textContent = item.task;
+
+                const descCell = document.createElement("td");
+                descCell.textContent = item.desc;
+
+                row.appendChild(taskCell);
+                row.appendChild(descCell);
+                table.appendChild(row);
+              });
+
+              // Append the table to the container
+              container.appendChild(table);
+            } else {
+              // Display "no data entries" message
+              const message = document.createElement("p");
+              message.innerHTML = "<h3>No Entries Found!</h3>";
+              container.appendChild(message);
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      });
+    </script>
+  </body>
 </html>

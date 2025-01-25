@@ -9,9 +9,9 @@ const server = http.createServer((request, response) => {
 
   // Routes
   if (url == "/" && method == "GET") {
-    readFileAndResponse(response, "./static/welcome.html");
+    readFileAndResponse(response, "./views/welcome.html");
   } else if (url == "/todo" && method == "GET") {
-    readFileAndResponse(response, "./static/todo.html");
+    readFileAndResponse(response, "./views/todo.html");
   } else if (url == "/submit" && method == "POST") {
     parseBody(request);
     response.writeHead(302, "Found", { Location: "/todo" });

@@ -39,4 +39,18 @@ function callFunc(
 callFunc(add, 10, 20);
 
 // Advanced Function Types
+// Rest parameters
+function sum(...numbers: number[]) {
+  
+}
 
+
+// Overloaded functions
+function merge(a: number, b: number): number;
+function merge(a: string, b: string): string;
+function merge(a: any, b: any): any {
+  return a + b;
+}
+
+console.log(merge(10, 2)); // 12
+console.log(merge('Hello', ' World')); // "Hello World"

@@ -69,6 +69,7 @@ function Home() {
               movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
                 <MovieCard
                   movie={{
+                    id: movie.id,
                     title: movie.title,
                     release_date: movie.release_date,
                     url: movie.poster_path,

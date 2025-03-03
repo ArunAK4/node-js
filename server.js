@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import bodyParser from "body-parser";
 
 import postsRouter from "./routes/posts.js";
 
@@ -11,6 +12,8 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware for static files
 app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
   //   res.json({ data: { message: "Hello World!!!" } });

@@ -2,7 +2,7 @@ name: First workflow in Node JS
 on: 
   push: 
     branches:  
-      - main
+      - express-training
 jobs: 
   build: 
     runs-on: ubuntu-latest 

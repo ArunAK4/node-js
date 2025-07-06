@@ -1,6 +1,6 @@
 name: First workflow in Node JS
 on: 
-  push: 
+  fork: 
     branches:  
       - main
 jobs: 

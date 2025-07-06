@@ -1,8 +1,6 @@
 name: First workflow in Node JS
 on: 
-  fork: 
-    branches:  
-      - main
+  fork
 jobs: 
   build: 
     runs-on: ubuntu-latest 

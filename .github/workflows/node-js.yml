@@ -1,6 +1,6 @@
 name: First workflow in Node JS
 on: 
-  fork: 
+  push: 
     branches:  
       - express-training
 jobs: 
@@ -11,8 +11,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.9.1
+        with:
+          node-version: '22.13.1'
       - run: |
           node -v
           npm -v
           npm install
-          npm run build

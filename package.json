@@ -1,0 +1,29 @@
+{
+  "name": "node_js_training",
+  "version": "1.0.0",
+  "description": "Node JS Training",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file=.env server.js",
+    "dev": "node --watch --env-file=.env server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sharan-jayakumar/node_js_training.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sharan-jayakumar/node_js_training/issues"
+  },
+  "homepage": "https://github.com/Sharan-jayakumar/node_js_training#readme",
+  "dependencies": {
+    "@types/node": "^22.13.5",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "node": "^23.9.0"
+  }
+}

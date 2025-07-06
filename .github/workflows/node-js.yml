@@ -1,0 +1,19 @@
+name: First workflow in Node JS
+on: 
+  push: 
+    branches:  
+      - main
+jobs: 
+  build: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Checkout 
+        uses: actions/checkout@v4
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.9.1
+        with:
+          node-version: '22.13.1'
+      - run: |
+          node -v
+          npm -v
+          npm install
